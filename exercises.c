@@ -41,46 +41,22 @@ debes reservar memoria para cada elemento que agregues.
 Al finalizar retorna la lista creada.
 */
 
-/*List* crea_lista() 
+List* crea_lista() 
 {
    List* L = create_list();
-   for (size_t k = 1; k < 11; k++) 
+   for (int i = 1; i <= 10; i++) 
    {
-      int *elemento = (int*)malloc(sizeof(int)); 
-      *elemento = k;
-      pushBack(L, elemento);
-   }
-   return L;
-}
-   */
-
-List* crea_lista() {
-   // Crear una lista vacía
-   List* L = create_list();
-   printf("[LOG] Lista creada.\n");
-
-   // Agregar elementos del 1 al 10
-   for (int i = 1; i <= 10; i++) {
-      // Reservar memoria para el entero
       int* dato = (int*)malloc(sizeof(int));
-      dato = i; // Asignar el valor correspondiente
-      printf("[LOG] Reservada memoria para el entero: %d\n",dato);
-
-      // Agregar el elemento al final de la lista
+      dato = i;
       pushBack(L, dato);
-      printf("[LOG] Elemento %d agregado a la lista.\n", *dato);
    }
-
-   // Retornar la lista creada
-   printf("[LOG] Lista completada. Retornando lista...\n");
    return L;
 }
-   
 /*
 Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
 retorne la suma de sus elementos.
-
+*/
 int sumaLista(List *L) 
 {
    if (L == NULL) return 0;
@@ -128,22 +104,16 @@ El orden de ambas pilas se debe mantener.
 Puedes usar una pila auxiliar.
 */
 
-void copia_pila(Stack* P1, Stack* P2) 
-{
-   Stack *pAux = create_stack();
-   while(top(P1) != -1)
-   {
-      void *puntero = top(P1);
-      push(pAux , puntero );
-      pop(P1);
+void copia_pila(Stack P1, Stack* P2) {
+   Stack* pAux = create_stack();
+   while (top(P1) != NULL) {
+      void* dato = pop(P1);
+      push(pAux, dato);
    }
-
-   while(top(pAux) != -1)
-   {
-      void *puntero = top(pAux);
-      push(P1 , puntero);
-      push( P2, puntero );
-      pop(pAux);
+   while (top(pAux) != NULL) {
+      void* dato = pop(pAux);
+      push(P1, dato);
+      push(P2, dato);
    }
 }
 
@@ -154,43 +124,24 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 0 en caso contrario.
 */
 
-int parentesisBalanceados(char *cadena) 
-{
-   Stack *pilAux = create_stack();
-   Stack *pilaComp = create_stack();
-   Stack *pilaOriginal = create_stack();
-   if (!pilAux || !pilaComp || !pilaOriginal) return 0;
-
-   int len = strlen(cadena);
-
-   for (int k = 0; k < len ; k ++)
-   {
-      char *c = malloc(sizeof(char));
-      if (!c)return 0;
-      *c = cadena[k];
-      push(pilAux , *c);
-      push(pilaComp , *c);
+int parentesisBalanceados(char *cadena) {
+   Stack* pilAux = create_stack();
+   Stack* pilaComp = create_stack();
+   for (char *c = cadena; *c != '\0'; c++) {
+      if (*c == '(' || *c == '{' || *c == '[') {
+         char *dato = (char*)malloc(sizeof(char));
+         *dato = *c;
+         push(pilAux, dato);
+         push(pilaComp, dato);
+      } else if (*c == ')' || *c == '}' || *c == ']') {
+         char *c1 = (char*)pop(pilAux);
+         char *c2 = (char*)pop(pilaComp);
+         if ((*c1 == '(' && *c2 != ')') || (*c1 == '{' && *c2 != '}') || (*c1 == '[' && *c2 != ']')) {
+            return 0;
+         }
+      }
    }
-
-  
-   while ( top(pilAux) != -1)
-   {
-      push(pilaOriginal , top(pilAux));
-      pop(pilAux);
-   }
-
-   while (top(pilaOriginal) != -1)
-   {
-      char *c1 = (char*)top(pilaOriginal);
-      char *c2 = (char*)top(pilaComp);
-      
-      if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
-      pop(pilaOriginal);
-      pop(pilaComp);
-   }
-
-
-   return 1;
+   return top(pilAux) == NULL;
 }
 
 
