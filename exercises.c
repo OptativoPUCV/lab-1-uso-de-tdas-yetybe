@@ -41,7 +41,7 @@ debes reservar memoria para cada elemento que agregues.
 Al finalizar retorna la lista creada.
 */
 
-List* crea_lista() 
+/*List* crea_lista() 
 {
    List* L = create_list();
    for (size_t k = 1; k < 11; k++) 
@@ -52,12 +52,35 @@ List* crea_lista()
    }
    return L;
 }
+   */
+
+List* crea_lista() {
+   // Crear una lista vacía
+   List* L = create_list();
+   printf("[LOG] Lista creada.\n");
+
+   // Agregar elementos del 1 al 10
+   for (int i = 1; i <= 10; i++) {
+      // Reservar memoria para el entero
+      int* dato = (int*)malloc(sizeof(int));
+      dato = i; // Asignar el valor correspondiente
+      printf("[LOG] Reservada memoria para el entero: %d\n",dato);
+
+      // Agregar el elemento al final de la lista
+      pushBack(L, dato);
+      printf("[LOG] Elemento %d agregado a la lista.\n", *dato);
+   }
+
+   // Retornar la lista creada
+   printf("[LOG] Lista completada. Retornando lista...\n");
+   return L;
+}
    
 /*
 Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
 retorne la suma de sus elementos.
-*/
+
 int sumaLista(List *L) 
 {
    if (L == NULL) return 0;

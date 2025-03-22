@@ -59,3 +59,75 @@ exercises.c:175:5: note: previous definition of 'main' was here
 cc1.exe: all warnings being treated as errors
 Compilation failed
 5f72e45
+Sat, Mar 22, 2025  8:20:45 PM: 
+ exercises.c | 27 +++++++++++++++++++++++++--
+ 1 file changed, 25 insertions(+), 2 deletions(-)
+In file included from test.c:5:0:
+exercises.c: In function 'crea_lista':
+exercises.c:66:12: error: assignment makes pointer from integer without a cast [-Werror=int-conversion]
+       dato = i; // Asignar el valor correspondiente
+            ^
+exercises.c:67:56: error: format '%d' expects argument of type 'int', but argument 2 has type 'int *' [-Werror=format=]
+       printf("[LOG] Reservada memoria para el entero: %d\n",dato);
+                                                        ^
+exercises.c: At top level:
+exercises.c:98:1: error: "/*" within comment [-Werror=comment]
+ /*
+  
+exercises.c: In function 'copia_pila':
+exercises.c:134:18: error: comparison between pointer and integer [-Werror]
+    while(top(P1) != -1)
+                  ^~
+exercises.c:141:20: error: comparison between pointer and integer [-Werror]
+    while(top(pAux) != -1)
+                    ^~
+exercises.c: In function 'parentesisBalanceados':
+exercises.c:171:21: error: passing argument 2 of 'push' makes pointer from integer without a cast [-Werror=int-conversion]
+       push(pilAux , *c);
+                     ^
+In file included from exercises.c:7:0,
+                 from test.c:5:
+stack.h:11:6: note: expected 'void *' but argument is of type 'char'
+ void push(Stack *stack, void *data) { pushFront(stack, data); }
+      ^~~~
+In file included from test.c:5:0:
+exercises.c:172:23: error: passing argument 2 of 'push' makes pointer from integer without a cast [-Werror=int-conversion]
+       push(pilaComp , *c);
+                       ^
+In file included from exercises.c:7:0,
+                 from test.c:5:
+stack.h:11:6: note: expected 'void *' but argument is of type 'char'
+ void push(Stack *stack, void *data) { pushFront(stack, data); }
+      ^~~~
+In file included from test.c:5:0:
+exercises.c:176:24: error: comparison between pointer and integer [-Werror]
+    while ( top(pilAux) != -1)
+                        ^~
+exercises.c:182:29: error: comparison between pointer and integer [-Werror]
+    while (top(pilaOriginal) != -1)
+                             ^~
+exercises.c:187:22: error: suggest parentheses around '&&' within '||' [-Werror=parentheses]
+       if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
+           ~~~~~~~~~~~^~~~~~~~~~~~~
+exercises.c:187:78: error: suggest parentheses around '&&' within '||' [-Werror=parentheses]
+       if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
+                                                                   ~~~~~~~~~~~^~~~~~~~~~~~~
+exercises.c: In function 'main':
+exercises.c:200:10: error: unused variable 'lista' [-Werror=unused-variable]
+    List *lista = crea_lista();
+          ^~~~~
+test.c: In function 'test_suma_lista':
+test.c:100:17: error: implicit declaration of function 'sumaLista' [-Werror=implicit-function-declaration]
+     int suma2 = sumaLista(L);
+                 ^~~~~~~~~
+test.c: At top level:
+test.c:253:5: error: redefinition of 'main'
+ int main( int argc, char *argv[] ) {
+     ^~~~
+In file included from test.c:5:0:
+exercises.c:198:5: note: previous definition of 'main' was here
+ int main()
+     ^~~~
+cc1.exe: all warnings being treated as errors
+Compilation failed
+232d617
