@@ -1,0 +1,17 @@
+Sat, Mar 22, 2025  8:58:48 PM: 
+In file included from test.c:5:0:
+exercises.c: In function 'main':
+exercises.c:149:10: error: unused variable 'lista' [-Werror=unused-variable]
+    List *lista = crea_lista();
+          ^~~~~
+test.c: At top level:
+test.c:253:5: error: redefinition of 'main'
+ int main( int argc, char *argv[] ) {
+     ^~~~
+In file included from test.c:5:0:
+exercises.c:147:5: note: previous definition of 'main' was here
+ int main()
+     ^~~~
+cc1.exe: all warnings being treated as errors
+Compilation failed
+81d57fe
