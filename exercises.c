@@ -140,7 +140,7 @@ int parentesisBalanceados(char *cadena) {
          }
       }
    }
-   return top(pilAux) == NULL; // Verificar si la pila está vacía
+   return top(pilAux) == NULL; // Verificar si la pila está vacía xd
 }
 
 
