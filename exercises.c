@@ -41,17 +41,16 @@ debes reservar memoria para cada elemento que agregues.
 Al finalizar retorna la lista creada.
 */
 
-List* crea_lista() 
-{
+List* crea_lista() {
    List* L = create_list();
-   for (int i = 1; i <= 10; i++) 
-   {
-      int* dato = (int*)malloc(sizeof(int));
-      dato = i;
-      pushBack(L, dato);
+   for (int i = 1; i <= 10; i++) {
+      int* dato = (int*)malloc(sizeof(int)); // Reservar memoria para un entero
+      *dato = i; // Asignar el valor i al contenido de dato
+      pushBack(L, dato); // Agregar el dato a la lista
    }
    return L;
 }
+
 /*
 Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
@@ -106,11 +105,11 @@ Puedes usar una pila auxiliar.
 
 void copia_pila(Stack* P1, Stack* P2) {
    Stack* pAux = create_stack();
-   while (top(P1) != NULL) {
+   while (top(P1) != NULL) { // Comparar con NULL
       void* dato = pop(P1);
       push(pAux, dato);
    }
-   while (top(pAux) != NULL) {
+   while (top(pAux) != NULL) { // Comparar con NULL
       void* dato = pop(pAux);
       push(P1, dato);
       push(P2, dato);
@@ -129,19 +128,19 @@ int parentesisBalanceados(char *cadena) {
    Stack* pilaComp = create_stack();
    for (char *c = cadena; *c != '\0'; c++) {
       if (*c == '(' || *c == '{' || *c == '[') {
-         char *dato = (char*)malloc(sizeof(char));
-         *dato = *c;
-         push(pilAux, dato);
+         char* dato = (char*)malloc(sizeof(char)); // Reservar memoria para un char
+         *dato = *c; // Asignar el valor de *c al contenido de dato
+         push(pilAux, dato); // Pasar el puntero a push
          push(pilaComp, dato);
       } else if (*c == ')' || *c == '}' || *c == ']') {
-         char *c1 = (char*)pop(pilAux);
-         char *c2 = (char*)pop(pilaComp);
+         char* c1 = (char*)pop(pilAux);
+         char* c2 = (char*)pop(pilaComp);
          if ((*c1 == '(' && *c2 != ')') || (*c1 == '{' && *c2 != '}') || (*c1 == '[' && *c2 != ']')) {
             return 0;
          }
       }
    }
-   return top(pilAux) == NULL;
+   return top(pilAux) == NULL; // Verificar si la pila está vacía
 }
 
 
