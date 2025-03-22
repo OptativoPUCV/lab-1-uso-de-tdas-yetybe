@@ -41,18 +41,35 @@ debes reservar memoria para cada elemento que agregues.
 Al finalizar retorna la lista creada.
 */
 
-List* crea_lista() {
+List* crea_lista() 
+{
    List* L = create_list();
+   for (size_t k = 1; k < 11; k++) 
+   {
+      int *elemento = (int*)malloc(sizeof(int)); 
+      *elemento = k;
+      pushBack(L, elemento);
+   }
    return L;
 }
-
+   
 /*
 Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
 retorne la suma de sus elementos.
 */
-int sumaLista(List *L) {
-   return 0;
+int sumaLista(List *L) 
+{
+   if (L == NULL) return 0;
+
+   int contador = 0;
+   int *elemento = first(L);
+   while (elemento !=  NULL)
+   {
+      contador += *elemento;
+      elemento = next(L);
+   }
+   return contador;
 }
 
 /*
@@ -64,8 +81,21 @@ Asume que popCurrent luego de eliminar un elemento se
 posiciona en el elemento anterior.
 */
 
-void eliminaElementos(List*L, int elem){
+void eliminaElementos(List*L, int elem)
+{
+   int *posicion = first(L);
+   int *primero = first(L);
+   while(posicion != NULL)
+   {
+      if (*primero  == elem )
+         popFront(L);
 
+      else if (*posicion == elem)
+      {
+         popCurrent(L);
+      }
+      posicion = next(L); 
+   }
 }
 
 /*
@@ -75,7 +105,23 @@ El orden de ambas pilas se debe mantener.
 Puedes usar una pila auxiliar.
 */
 
-void copia_pila(Stack* P1, Stack* P2) {
+void copia_pila(Stack* P1, Stack* P2) 
+{
+   Stack *pAux = create_stack();
+   while(top(P1) != -1)
+   {
+      void *puntero = top(P1);
+      push(pAux , puntero );
+      pop(P1);
+   }
+
+   while(top(pAux) != -1)
+   {
+      void *puntero = top(pAux);
+      push(P1 , puntero);
+      push( P2, puntero );
+      pop(pAux);
+   }
 }
 
 /*
@@ -85,7 +131,51 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 0 en caso contrario.
 */
 
-int parentesisBalanceados(char *cadena) {
-   return 0;
+int parentesisBalanceados(char *cadena) 
+{
+   Stack *pilAux = create_stack();
+   Stack *pilaComp = create_stack();
+   Stack *pilaOriginal = create_stack();
+   if (!pilAux || !pilaComp || !pilaOriginal) return 0;
+
+   int len = strlen(cadena);
+
+   for (int k = 0; k < len ; k ++)
+   {
+      char *c = malloc(sizeof(char));
+      if (!c)return 0;
+      *c = cadena[k];
+      push(pilAux , *c);
+      push(pilaComp , *c);
+   }
+
+  
+   while ( top(pilAux) != -1)
+   {
+      push(pilaOriginal , top(pilAux));
+      pop(pilAux);
+   }
+
+   while (top(pilaOriginal) != -1)
+   {
+      char *c1 = (char*)top(pilaOriginal);
+      char *c2 = (char*)top(pilaComp);
+      
+      if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
+      pop(pilaOriginal);
+      pop(pilaComp);
+   }
+
+
+   return 1;
 }
 
+
+
+int main()
+{
+   List *lista = crea_lista();
+    
+  
+   return 0;
+}

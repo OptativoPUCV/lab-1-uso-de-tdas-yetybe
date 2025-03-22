@@ -2,3 +2,60 @@ Fri, Mar 21, 2025  7:46:39 PM:
  tests:  0|5
 total_score: 0/70
 3f6cb15
+Sat, Mar 22, 2025  8:14:46 PM: 
+ exercises.c | 104 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 97 insertions(+), 7 deletions(-)
+In file included from test.c:5:0:
+exercises.c: In function 'copia_pila':
+exercises.c:111:18: error: comparison between pointer and integer [-Werror]
+    while(top(P1) != -1)
+                  ^~
+exercises.c:118:20: error: comparison between pointer and integer [-Werror]
+    while(top(pAux) != -1)
+                    ^~
+exercises.c: In function 'parentesisBalanceados':
+exercises.c:148:21: error: passing argument 2 of 'push' makes pointer from integer without a cast [-Werror=int-conversion]
+       push(pilAux , *c);
+                     ^
+In file included from exercises.c:7:0,
+                 from test.c:5:
+stack.h:11:6: note: expected 'void *' but argument is of type 'char'
+ void push(Stack *stack, void *data) { pushFront(stack, data); }
+      ^~~~
+In file included from test.c:5:0:
+exercises.c:149:23: error: passing argument 2 of 'push' makes pointer from integer without a cast [-Werror=int-conversion]
+       push(pilaComp , *c);
+                       ^
+In file included from exercises.c:7:0,
+                 from test.c:5:
+stack.h:11:6: note: expected 'void *' but argument is of type 'char'
+ void push(Stack *stack, void *data) { pushFront(stack, data); }
+      ^~~~
+In file included from test.c:5:0:
+exercises.c:153:24: error: comparison between pointer and integer [-Werror]
+    while ( top(pilAux) != -1)
+                        ^~
+exercises.c:159:29: error: comparison between pointer and integer [-Werror]
+    while (top(pilaOriginal) != -1)
+                             ^~
+exercises.c:164:22: error: suggest parentheses around '&&' within '||' [-Werror=parentheses]
+       if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
+           ~~~~~~~~~~~^~~~~~~~~~~~~
+exercises.c:164:78: error: suggest parentheses around '&&' within '||' [-Werror=parentheses]
+       if (*c1 == '(' && *c2 != ')' || *c1 == '{' && *c2 != '}' || *c1 == '[' && *c2 != ']'  ) return 0;
+                                                                   ~~~~~~~~~~~^~~~~~~~~~~~~
+exercises.c: In function 'main':
+exercises.c:177:10: error: unused variable 'lista' [-Werror=unused-variable]
+    List *lista = crea_lista();
+          ^~~~~
+test.c: At top level:
+test.c:253:5: error: redefinition of 'main'
+ int main( int argc, char *argv[] ) {
+     ^~~~
+In file included from test.c:5:0:
+exercises.c:175:5: note: previous definition of 'main' was here
+ int main()
+     ^~~~
+cc1.exe: all warnings being treated as errors
+Compilation failed
+5f72e45
