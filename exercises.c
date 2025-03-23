@@ -6,8 +6,6 @@
 #include "arraylist.h"
 #include "stack.h"
 
-//#include "exercises.h"
-
 //Funciones auxiliares que puedes utilizar para debuggear tus ejercicios
 //NO MODIFICAR
 void imprime_lista(List *L) {
@@ -19,7 +17,6 @@ void imprime_lista(List *L) {
       dato = (int*)next(L);
    }
    printf("]\n");
-
 }
 
 //Ojo que la pila se vacía al imprimir y se imprime en orden inverso
@@ -50,12 +47,13 @@ List* crea_lista() {
    }
    return L;
 }
+
 /*
 Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
 retorne la suma de sus elementos.
 */
-int sumaLista(List *L)  
+int sumaLista(List *L) 
 {
    if (L == NULL) return 0;
 
@@ -139,15 +137,5 @@ int parentesisBalanceados(char *cadena) {
          }
       }
    }
-   return top(pilAux) == NULL; // Verificar si la pila está vacía xd
-}
-
-
-
-int main()
-{
-   List *lista = crea_lista();
-    
-  
-   return 0;
+   return top(pilAux) == NULL; // Verificar si la pila está vacía
 }
