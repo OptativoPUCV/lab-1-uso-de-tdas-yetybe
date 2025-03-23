@@ -53,14 +53,12 @@ Ejercicio 2.
 Crea una función que reciba una lista de enteros (int*) y 
 retorne la suma de sus elementos.
 */
-int sumaLista(List *L) 
-{
+int sumaLista(List *L) {
    if (L == NULL) return 0;
 
    int contador = 0;
    int *elemento = first(L);
-   while (elemento !=  NULL)
-   {
+   while (elemento != NULL) {
       contador += *elemento;
       elemento = next(L);
    }
@@ -75,21 +73,14 @@ de la lista que sean iguales a elem.
 Asume que popCurrent luego de eliminar un elemento se
 posiciona en el elemento anterior.
 */
-
-void eliminaElementos(List*L, int elem)
-{
+void eliminaElementos(List* L, int elem) {
    int *posicion = first(L);
-   int *primero = first(L);
-   while(posicion != NULL)
-   {
-      if (*primero  == elem )
-         popFront(L);
-
-      else if (*posicion == elem)
-      {
+   while (posicion != NULL) {
+      if (*posicion == elem) {
          popCurrent(L);
+      } else {
+         posicion = next(L);
       }
-      posicion = next(L); 
    }
 }
 
@@ -99,14 +90,13 @@ La función copia los punteros de la pila P1 en la pila P2.
 El orden de ambas pilas se debe mantener.
 Puedes usar una pila auxiliar.
 */
-
 void copia_pila(Stack* P1, Stack* P2) {
    Stack* pAux = create_stack();
-   while (top(P1) != NULL) { // Comparar con NULL
+   while (top(P1) != NULL) {
       void* dato = pop(P1);
       push(pAux, dato);
    }
-   while (top(pAux) != NULL) { // Comparar con NULL
+   while (top(pAux) != NULL) {
       void* dato = pop(pAux);
       push(P1, dato);
       push(P2, dato);
@@ -121,21 +111,22 @@ paraéntesis balanceados. Retorna 1 si están balanceados,
 */
 
 int parentesisBalanceados(char *cadena) {
-   Stack* pilAux = create_stack();
-   Stack* pilaComp = create_stack();
+   Stack* pila = create_stack();
    for (char *c = cadena; *c != '\0'; c++) {
       if (*c == '(' || *c == '{' || *c == '[') {
-         char* dato = (char*)malloc(sizeof(char)); // Reservar memoria para un char
-         *dato = *c; // Asignar el valor de *c al contenido de dato
-         push(pilAux, dato); // Pasar el puntero a push
-         push(pilaComp, dato);
+         char* dato = (char*)malloc(sizeof(char));
+         *dato = *c;
+         push(pila, dato);
       } else if (*c == ')' || *c == '}' || *c == ']') {
-         char* c1 = (char*)pop(pilAux);
-         char* c2 = (char*)pop(pilaComp);
-         if ((*c1 == '(' && *c2 != ')') || (*c1 == '{' && *c2 != '}') || (*c1 == '[' && *c2 != ']')) {
+         if (top(pila) == NULL) return 0; // No hay apertura para este cierre
+         char* apertura = (char*)pop(pila);
+         if ((*apertura == '(' && *c != ')') ||
+             (*apertura == '{' && *c != '}') ||
+             (*apertura == '[' && *c != ']')) {
             return 0;
          }
+         free(apertura);
       }
    }
-   return top(pilAux) == NULL; // Verificar si la pila está vacía
+   return top(pila) == NULL; // La pila debe estar vacía si todo está balanceado
 }
